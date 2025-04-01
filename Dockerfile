@@ -32,6 +32,13 @@ ARG APP_DATABASE_NAME
 ARG SOURCE_LOCATION
 ARG BUILD_LOCATION
 
+# Install necessary packages
+RUN apt update && apt install -y \
+    wget \
+    gnupg \
+    lsb-release
+
+
 # Add PostgreSQL official repository
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | tee /etc/apt/trusted.gpg.d/postgresql.asc \
